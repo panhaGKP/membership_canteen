@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Customer $customer
  */
-
+    $today_date = date("Y-m-d");
 ?>
 <div class="row">
     <aside class="column">
@@ -91,7 +91,7 @@
                             <th><?= __('Bundle Type') ?></th>
                             <th><?= __('Start Date') ?></th>
                             <th><?= __('End Date') ?></th>
-                            <th><?= __('Is Active') ?></th>
+                            <th><?= __('Status') ?></th>
                         </tr>
                         <?php foreach ($customer->memberships as $membership) : ?>
                         <tr>
@@ -99,8 +99,9 @@
                             <td><?= h($membership->bundle->name) ?></td>
                             <td><?= h($membership->start_date) ?></td>
                             <td><?= h($membership->end_date) ?></td>
-                            <?php if ($membership->is_active){?>
+                            <?php if ($membership->end_date->toDateString() >= $today_date && $membership->start_date->toDateString() <= $today_date){?>
                                 <td style="display: flex">
+
                                     <div style="border: 1px solid #6eec5a; background-color: #6eec5a; color: white; padding: 0 10px; border-radius: 1rem"> Active</div>
                                 </td>
                             <?php }else{?>

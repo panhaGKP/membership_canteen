@@ -3,7 +3,11 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Membership[]|\Cake\Collection\CollectionInterface $memberships
  */
+//    echo date('m/d/Y');
+$today_date = date("Y-m-d");
+//echo $today_date;
 ?>
+
 <div class="memberships index content">
     <?= $this->Form->create(null,['type'=>'get'])?>
     <?= $this->Form->control('searchText', ['label'=>'Search Membership', 'value'=>$this->request->getQuery('searchText')])?>
@@ -30,7 +34,10 @@
                     <td><?= $membership->has('customer') ? $this->Html->link($membership->customer->name, ['controller' => 'Customers', 'action' => 'view', $membership->customer->id]) : '' ?></td>
                     <td><?= $membership->customer->gender == 'm'?  h('Male'): h('Female') ?></td>
                     <td><?= $membership->has('customer') ? h($membership->customer->phone_number) : ''?></td>
-                    <?php if ($membership->is_active){?>
+                    <?php
+//                    echo $membership->end_date;
+
+                    if ($membership->end_date->toDateString() >= $today_date && $membership->start_date->toDateString() <= $today_date){?>
                     <td style="display: flex">
                         <div style="border: 1px solid #6eec5a; background-color: #6eec5a; color: white; padding: 0 10px; border-radius: 1rem"> Active</div>
                     </td>

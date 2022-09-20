@@ -179,8 +179,9 @@ class CheckinsController extends AppController
          */
         $active_memberships = array();
         $inactive_memberships=array();
+        $today_date = date("Y-m-d");
         foreach ($memberships as $membership){
-            if($membership->is_active){
+            if($membership->end_date->toDateString() >= $today_date && $membership->start_date->toDateString() <= $today_date){
                 $active_memberships[] = $membership;
             }else{
                 $inactive_memberships[] = $membership;
