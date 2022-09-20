@@ -11,6 +11,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $customer_id
  * @property int|null $membership_id
+ * @property \Cake\I18n\FrozenTime|null $deleted
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
@@ -31,6 +32,7 @@ class Checkin extends Entity
         'customer_id' => true,
         'membership_id' => true,
         'created' => true,
+        'deleted'=> true,
         'modified' => true,
         'customer' => true,
     ];

@@ -13,6 +13,9 @@ class CustomersController extends AppController
 {
     public $paginate =[
         'limit'=>10,
+        'order'=>[
+            'id'=>'desc'
+        ]
     ];
     /**
      * Index method

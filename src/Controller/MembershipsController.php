@@ -72,7 +72,9 @@ class MembershipsController extends AppController
     {
         $membership = $this->Memberships->newEmptyEntity();
         if ($this->request->is('post')) {
+//            debug($membership);
             $membership = $this->Memberships->patchEntity($membership, $this->request->getData());
+
             $bundle_id = $membership->bundle_id;
 
             /**
@@ -92,7 +94,7 @@ class MembershipsController extends AppController
                 $membership->is_active = false;
             }
 //            dd($membership->is_active);
-
+//            debug($membership);
             if ($this->Memberships->save($membership)) {
                 $this->Flash->success(__('The membership has been saved.'));
 

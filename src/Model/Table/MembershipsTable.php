@@ -47,6 +47,7 @@ class MembershipsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Muffin/Trash.Trash',[]);
 
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id',
@@ -56,6 +57,13 @@ class MembershipsTable extends Table
             'foreignKey' => 'bundle_id',
             'joinType' => 'INNER',
         ]);
+
+        //new behaviors
+//        $this->addBehavior('Muffin/Trash.Trash', [
+//            'events' => ['Model.beforeFind'], // enables the beforeFind event only, false to disable both
+//            'dependent'=>true,
+//            'cascadeCallbacks'=>true
+//        ]);
     }
 
     /**

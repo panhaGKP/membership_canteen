@@ -34,6 +34,7 @@ class CheckinsController extends AppController
         $this->set(compact('checkins'));
     }
 
+
     /**
      * View method
      *
@@ -55,25 +56,17 @@ class CheckinsController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function addOldVersion()
     {
         $checkin = $this->Checkins->newEmptyEntity();
         if ($this->request->is('post')) {
 
             $data = $this->request->getData();
 
-
-            //debug(getType($checkin->membership_id));
-
-            //check if user have membership
-            $customer_id = $checkin->customer_id;
-//            debug($customer_id);
             $memberships =  $this->Checkins->Customers->Memberships->find()
                 ->where(['customer_id'=>$data['customer_id']])
                 ->toArray();
-            //dd($memberships);
-            //if memberships, check if the status is active
-            //$membership_status = false;
+
             $membership_id = null;
 
                 //check for active memberships
@@ -86,7 +79,7 @@ class CheckinsController extends AppController
                     }
                 }
             $data['membership_id'] = $membership_id;
-//            dd($data);
+
 
             $checkin = $this->Checkins->patchEntity($checkin, $data);
             if ($this->Checkins->save($checkin)) {
@@ -98,6 +91,24 @@ class CheckinsController extends AppController
         }
         $customers = $this->Checkins->Customers->find('list', ['limit' => 200])->all();
         $this->set(compact('checkin', 'customers'));
+    } //add old version
+    public function add() // new version
+    {
+        $data =$this->request->getQuery();
+        $data['customer_id'] = intval($data['customer_id']);
+        $data['membership_id'] = $data['membership_id'] == 'null'? null : intval($data['membership_id']);
+        $checkin = $this->Checkins->newEmptyEntity();
+
+        $checkin = $this->Checkins->patchEntity($checkin, $data);
+
+
+        if ($this->Checkins->save($checkin)) {
+            $this->Flash->success(__('The checkin has been saved.'));
+
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('The checkin could not be saved. Please, try again.'));
+
     }
 
     /**
@@ -144,4 +155,42 @@ class CheckinsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    public function chooseCustomer(){
+        if($this->request->is('post')){
+            $data = $this->request->getData();
+            dd($data);
+        }
+        $customers = $this->Checkins->Customers->find('list', ['limit' => 200])->all();
+        $this->set(compact('customers'));
+    }
+    public function searchMemberships(){
+        /**
+         * @var \Cake\Collection\CollectionInterface|string[] $membership
+         */
+        $data = $this->request->getQuery();
+      //  debug($data);
+        $customer_id = intval($data['customer_id']);
+      //  dd($customer_id);
+        $memberships =  $this->Checkins->Customers->Memberships->find()
+            ->where(['customer_id'=>$data['customer_id']])
+            ->toArray();
+        /**
+         * @var \App\Model\Entity\Membership $membership
+         */
+        $active_memberships = array();
+        $inactive_memberships=array();
+        foreach ($memberships as $membership){
+            if($membership->is_active){
+                $active_memberships[] = $membership;
+            }else{
+                $inactive_memberships[] = $membership;
+            }
+//            debug($membership->is_active);
+        }
+//        debug($active_memberships);
+//        debug($inactive_memberships);
+//        exit();
+        $this->set(compact('active_memberships', 'inactive_memberships','memberships'));
+    }
+
 }

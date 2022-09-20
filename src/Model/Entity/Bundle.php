@@ -12,9 +12,9 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property int $price
  * @property int $duration
- * @property int $deleted
+ * @property \Cake\I18n\FrozenTime|null $deleted
  * @property \Cake\I18n\FrozenTime $created
- * @property \Cake\I18n\FrozenTime $modified
+ * @property \Cake\I18n\FrozenTime|null $modified
  *
  * @property \App\Model\Entity\Membership[] $memberships
  */

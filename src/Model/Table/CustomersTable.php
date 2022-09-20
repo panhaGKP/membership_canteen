@@ -54,6 +54,8 @@ class CustomersTable extends Table
         $this->hasMany('Memberships', [
             'foreignKey' => 'customer_id',
         ]);
+        // new behavior
+        $this->addBehavior('Muffin/Trash.Trash',[]);
     }
 
     /**
@@ -89,9 +91,6 @@ class CustomersTable extends Table
 //            ->maxLength('profile_picture', 45)
             ->allowEmptyFile('profile_picture');
 
-        $validator
-            ->boolean('deleted')
-            ->notEmptyString('deleted');
 
         $validator
             ->allowEmptyFile('profile_picture')

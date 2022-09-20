@@ -75,10 +75,6 @@ class BundlesTable extends Table
             ->integer('duration')
             ->requirePresence('duration', 'create')
             ->notEmptyString('duration');
-
-        $validator
-            ->notEmptyString('deleted');
-
         return $validator;
     }
 }

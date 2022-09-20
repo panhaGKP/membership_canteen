@@ -5,6 +5,7 @@ namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
 
+
 /**
  * Customer Entity
  *
@@ -14,7 +15,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate|null $date_of_birth
  * @property string|null $phone_number
  * @property string|null $profile_picture
- * @property bool $deleted
+ * @property \Cake\I18n\FrozenTime|null $deleted
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
@@ -23,6 +24,7 @@ use Cake\ORM\Entity;
  */
 class Customer extends Entity
 {
+
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
      *

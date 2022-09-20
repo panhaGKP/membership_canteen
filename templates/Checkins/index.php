@@ -3,9 +3,10 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Checkin[]|\Cake\Collection\CollectionInterface $checkins
  */
+//debug($checkins)
 ?>
 <div class="checkins index content">
-    <?= $this->Html->link(__('New Checkin'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <?= $this->Html->link(__('New Checkin'), ['action' => 'chooseCustomer'], ['class' => 'button float-right']) ?>
     <h3><?= __('Checkins') ?></h3>
     <div class="table-responsive">
         <table>

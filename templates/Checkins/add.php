@@ -6,6 +6,7 @@
  */
 ?>
 <div class="row">
+<!--    For aside page-->
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
@@ -13,6 +14,9 @@
         </div>
     </aside>
     <div class="column-responsive column-80">
+        <?php
+//        dd($checkin);
+        ?>
         <div class="checkins form content">
             <?= $this->Form->create($checkin) ?>
             <fieldset>

@@ -5,6 +5,8 @@
  * @var \Cake\Collection\CollectionInterface|string[] $customers
  * @var \Cake\Collection\CollectionInterface|string[] $bundles
  */
+//    debug(getType($customers));
+//    debug(getType($this->request->getQuery()));
 ?>
 <div class="row">
     <aside class="column">
@@ -19,7 +21,11 @@
             <fieldset>
                 <legend><?= __('Add Membership') ?></legend>
                 <?php
-                    echo $this->Form->control('customer_id', ['options' => $customers]);
+                    if ($this->request->getQuery('customer_id') !== null){
+                        echo $this->Form->control('customer_id', ['value'=>$this->request->getQuery('customer_id')]);
+                    }else{
+                        echo $this->Form->control('customer_id', ['options' => $customers]);
+                    }
                     echo $this->Form->control('bundle_id', ['options' => $bundles]);
                     echo $this->Form->control('start_date');
                 ?>

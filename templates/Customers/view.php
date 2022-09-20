@@ -40,7 +40,7 @@
 
                     <td style=""><?= $this->Html->image($customer->profile_picture)?></td>
                     <?php
-                    echo $customer->profile_picture;
+//                    echo $customer->profile_picture;
                     ?>
                 </tr>
                 <tr>
