@@ -30,7 +30,7 @@
                     <td><?= h($checkin->created->format('h:i a')) ?></td>
                     <td><?= h($checkin->customer->phone_number) ?></td>
                     <td class="actions">
-                        <?= $this->Form->Html->link(__('View'),['controller'=>'Customers', 'action'=>'view',$checkin->customer->id])?>
+                        <?= $this->Form->Html->link(__('View'),['action'=>'view',$checkin->id])?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $checkin->id], ['confirm' => __('Are you sure you want to delete # {0}?', $checkin->id)]) ?>
                     </td>
                 </tr>
