@@ -90,7 +90,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     <?= $this->Html->image('profile_pictures/logo.png',['class'=>'logo'])?>
                     <span class="fs-5 fw-bold text-black-50">Wellness <br>Center</span>
                 </a>
-                <ul class="nav nav-pills fw-bold fs-6  align-content-center">
+                <ul class="nav nav-pills fw-bold fs-5  align-content-center">
                     <li class="nav-item me-lg-3 ">
                         <?= $this->Html->link('Customers', [
                             'controller' => 'Customers',
