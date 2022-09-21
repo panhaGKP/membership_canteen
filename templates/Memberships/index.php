@@ -23,7 +23,7 @@ $today_date = date("Y-m-d");
                     <th><?= $this->Paginator->sort('customer_id', 'Customer Name') ?></th>
                     <th><?= $this->Paginator->sort('gender') ?></th>
                     <th><?= $this->Paginator->sort('customer_id', 'Phone Number') ?></th>
-                    <th><?= $this->Paginator->sort('is_active', 'Status') ?></th>
+                    <th><?= h('Status')?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -47,7 +47,7 @@ $today_date = date("Y-m-d");
                         </td>
                     <?php }?>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['controller'=> 'Customers', 'action'=> 'view', $membership->customer->id]) ?>
+                        <?= $this->Html->link(__('View'), ['action'=> 'view', $membership->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $membership->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $membership->id], ['confirm' => __('Are you sure you want to delete # {0}?', $membership->id)]) ?>
                     </td>
