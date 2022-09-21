@@ -55,7 +55,7 @@ $today_date = date("Y-m-d");
                     <?php }?>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action'=> 'view', $membership->id],['class'=>'btn btn-primary py-0 me-2']) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $membership->id],['class'=>'btn btn-success py-0 me-2']) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $membership->id],['class'=>'btn btn-success py-0 me-2 disabled']) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $membership->id], ['confirm' => __('Are you sure you want to delete # {0}?', $membership->id), 'class'=>'btn btn-danger py-0 me-2']) ?>
                     </td>
                 </tr>
