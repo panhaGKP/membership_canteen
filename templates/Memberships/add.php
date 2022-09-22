@@ -9,28 +9,22 @@
 //    debug(getType($this->request->getQuery()));
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Memberships'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column-responsive column-80">
         <div class="memberships form content">
             <?= $this->Form->create($membership) ?>
             <fieldset>
-                <legend><?= __('Add Membership') ?></legend>
+                <legend class="mt-4 mb-3 fs-2"><?= __('Add Membership') ?></legend>
                 <?php
                     if ($this->request->getQuery('customer_id') !== null){
-                        echo $this->Form->control('customer_id', ['value'=>$this->request->getQuery('customer_id')]);
+                        echo $this->Form->control('customer_id', ['value'=>$this->request->getQuery('customer_id'), 'label'=>['floating'=>true],'class'=>'w-50']);
                     }else{
-                        echo $this->Form->control('customer_id', ['options' => $customers]);
+                        echo $this->Form->control('customer_id', ['options' => $customers, 'class'=>'w-50', 'label'=>['floating'=>true],]);
                     }
-                    echo $this->Form->control('bundle_id', ['options' => $bundles]);
-                    echo $this->Form->control('start_date');
+                    echo $this->Form->control('bundle_id', ['options' => $bundles, 'class'=>'w-50', 'label'=>['floating'=>true],]);
+                    echo $this->Form->control('start_date', ['label'=>['floating'=>true], 'class'=>'w-50']);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Submit'), ['class'=>'btn btn-success']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

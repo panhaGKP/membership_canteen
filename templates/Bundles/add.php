@@ -5,25 +5,19 @@
  */
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Bundles'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column-responsive column-80">
         <div class="bundles form content">
             <?= $this->Form->create($bundle) ?>
             <fieldset>
-                <legend><?= __('Add Bundle') ?></legend>
+                <legend class="mt-5 mb-3 h2"><?= __('Add Bundle') ?></legend>
                 <?php
-                    echo $this->Form->control('name');
-                    echo $this->Form->control('price');
-                    echo $this->Form->control('duration');
+                    echo $this->Form->control('name', ['label'=>['floating'=>true], 'class'=>'w-50']);
+                    echo $this->Form->control('price' ,['label'=>['floating'=>true], 'class'=>'w-50']);
+                    echo $this->Form->control('duration' ,['label'=>['floating'=>true],'class'=>'w-50']);
 
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Add Bundle'),['class'=>'btn btn-success']) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

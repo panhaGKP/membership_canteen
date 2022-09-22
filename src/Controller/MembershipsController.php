@@ -76,7 +76,6 @@ class MembershipsController extends AppController
             $membership = $this->Memberships->patchEntity($membership, $this->request->getData());
 
             $bundle_id = $membership->bundle_id;
-
             /**
              * @var \App\Model\Entity\Bundle $bundle
              */
