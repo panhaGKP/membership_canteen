@@ -82,13 +82,16 @@
                             <?php if (!empty($customer->memberships)) : ?>
                                 <div class="table-responsive">
                                     <table class="table table-striped">
-                                        <tr>
-                                            <th><?= __('Id') ?></th>
-                                            <th><?= __('Bundle Type') ?></th>
-                                            <th><?= __('Start Date') ?></th>
-                                            <th><?= __('End Date') ?></th>
-                                            <th><?= __('Status') ?></th>
-                                        </tr>
+                                        <thead>
+                                            <tr>
+                                                <th><?= __('Id') ?></th>
+                                                <th><?= __('Bundle Type') ?></th>
+                                                <th><?= __('Start Date') ?></th>
+                                                <th><?= __('End Date') ?></th>
+                                                <th><?= __('Status') ?></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                         <?php foreach ($customer->memberships as $membership) : ?>
                                             <tr>
                                                 <td><?= h($membership->id) ?></td>
@@ -108,6 +111,7 @@
 
                                             </tr>
                                         <?php endforeach; ?>
+                                        </tbody>
                                     </table>
                                 </div>
                             <?php endif; ?>
@@ -118,12 +122,15 @@
                         <?php if (!empty($customer->checkins)) : ?>
                             <div class="">
                                 <table class="table table-striped">
-                                    <tr>
-                                        <th><?= __('Check-in Id') ?></th>
+                                    <thead>
+                                        <tr>
+                                            <th><?= __('Check-in Id') ?></th>
 
-                                        <th><?= __('Date') ?></th>
-                                        <th><?= __('Membership ID') ?></th>
-                                    </tr>
+                                            <th><?= __('Date') ?></th>
+                                            <th><?= __('Membership ID') ?></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                     <?php foreach ($customer->checkins as $checkin) : ?>
                                         <tr>
                                             <td><?= h($checkin->id) ?></td>
@@ -137,6 +144,7 @@
 
                                         </tr>
                                     <?php endforeach; ?>
+                                    </tbody>
                                 </table>
                             </div>
                         <?php endif; ?>

@@ -69,9 +69,10 @@
         <hr>
         <div class="row">
             <div class="col-sm-12">
-                <?= $this->Html->link(__('Edit Membership'), ['action' => 'edit', $membership->id], ['class' => 'text-decoration-none btn btn-outline-success']) ?>
+                <?= $this->Html->link(__('Edit Membership'), ['action' => 'edit', $membership->id], ['class' => 'text-decoration-none btn btn-outline-success disabled']) ?>
                 <?= $this->Form->postLink(__('Delete Membership'), ['action' => 'delete', $membership->id], ['confirm' => __('Are you sure you want to delete # {0}?', $membership->id), 'class' => 'text-decoration-none btn btn-danger']) ?>
             </div>
         </div>
 
     </div>
+</div>

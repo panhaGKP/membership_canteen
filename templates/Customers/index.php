@@ -58,6 +58,8 @@
         </table>
     </div>
     <div class="paginator d-flex justify-content-between">
+        <p><?= $this->Paginator->counter(('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . ('first')) ?>
             <?= $this->Paginator->prev('< ' . ('previous')) ?>
@@ -65,6 +67,5 @@
             <?= $this->Paginator->next(('next') . ' >') ?>
             <?= $this->Paginator->last(('last') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
     </div>
 </div>

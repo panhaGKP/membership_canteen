@@ -13,12 +13,12 @@
         <fieldset>
             <legend><?= __('Select Customer') ?></legend>
             <?php
-            echo $this->Form->control('customer_id', ['options' => $customers]);
+            echo $this->Form->control('customer_id', ['options' => $customers, 'label'=>['floating'=>true], 'class'=>'w-50']);
             // echo $this->Form->control('bundle_id', ['options' => $bundles]);
 
             ?>
         </fieldset>
-        <?= $this->Form->button(__('Continue')) ?>
+        <?= $this->Form->button(__('Continue'), ['class'=>'btn btn-success']) ?>
         <?= $this->Form->end() ?>
     </div>
 </div>

@@ -4,41 +4,44 @@
  * @var \App\Model\Entity\Checkin $checkin
  */
 ?>
-<div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Edit Checkin'), ['action' => 'edit', $checkin->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Checkin'), ['action' => 'delete', $checkin->id], ['confirm' => __('Are you sure you want to delete # {0}?', $checkin->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('List Checkins'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('New Checkin'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+<div class="w-50">
+    <h4 class="h3 mt-5 mb-3 ms-2">View Check-in</h4>
+    <div class="card-body shadow mb-5">
+        <div class="row">
+            <div class="col-sm-3">
+                <h6 class="mb-0">Check-in ID</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <?= $this->Number->format($checkin->id) ?>
+            </div>
         </div>
-    </aside>
-    <div class="column-responsive column-80">
-        <div class="checkins view content">
-            <h3><?= h($checkin->id) ?></h3>
-            <table>
-                <tr>
-                    <th><?= __('Customer') ?></th>
-                    <td><?= $checkin->has('customer') ? $this->Html->link($checkin->customer->name, ['controller' => 'Customers', 'action' => 'view', $checkin->customer->id]) : '' ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($checkin->id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Membership Id') ?></th>
-                    <td><?= $checkin->membership_id === null ? '' : $this->Number->format($checkin->membership_id) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Created') ?></th>
-                    <td><?= h($checkin->created) ?></td>
-                </tr>
-                <tr>
-                    <th><?= __('Modified') ?></th>
-                    <td><?= h($checkin->modified) ?></td>
-                </tr>
-            </table>
+        <hr>
+        <div class="row">
+            <div class="col-sm-3">
+                <h6 class="mb-0">Customer Name</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <?= $checkin->has('customer') ? $this->Html->link($checkin->customer->name, ['controller' => 'Customers', 'action' => 'view', $checkin->customer->id],['class'=>'text-decoration-none text-danger']) : '' ?>
+            </div>
         </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <h6 class="mb-0">Membership ID</h6>
+            </div>
+            <div class="col-sm-9 text-secondary">
+                <?= $checkin->membership_id === null ? 'N/A' : $this->Number->format($checkin->membership_id) ?>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <?= $this->Html->link(__('Edit Checkin'), ['action' => 'edit', $checkin->id], ['class' => 'text-decoration-none btn btn-outline-success disabled']) ?>
+                <?= $this->Form->postLink(__('Delete Checkin'), ['action' => 'delete', $checkin->id], ['confirm' => __('Are you sure you want to delete # {0}?', $checkin->id), 'class' => 'text-decoration-none btn btn-danger']) ?>
+            </div>
+        </div>
+
     </div>
 </div>
