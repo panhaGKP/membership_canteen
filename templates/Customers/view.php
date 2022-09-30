@@ -83,7 +83,7 @@
                         <div class="related">
                             <?php if (!empty($customer->memberships)) : ?>
                                 <div class="table-responsive">
-                                    <table class="table table-striped">
+                                    <table class="table table-hover">
                                         <thead>
                                             <tr>
                                                 <th><?= __('Id') ?></th>
@@ -123,7 +123,7 @@
                     <div class="card mb-3 shadow-sm py-0 px-2 w-75">
                         <?php if (!empty($customer->checkins)) : ?>
                             <div class="">
-                                <table class="table table-striped">
+                                <table class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th><?= __('Check-in Id') ?></th>

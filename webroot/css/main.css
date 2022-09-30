@@ -1,0 +1,18 @@
+.bg-lol{
+    background-color: #8efc8e !important;
+}
+.bg-add-btn{
+    background-color: #09d129;
+}
+.bg-view-btn{
+    background-color: #5ad1f6;
+    color: white;
+}
+.bg-edit-btn{
+    background-color: #8efc8e;
+    color: white;
+}
+.bg-delete-btn{
+    background-color: #f34011;
+    color: white;
+}

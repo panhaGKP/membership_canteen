@@ -18,14 +18,15 @@ $this->assign('title','Customers List');
         </div>
     </div>
     <div class="flex-row-reverse d-flex ">
-        <div class="btn mt-3 bg-success ">
+        <div class="btn mt-3 bg-add-btn">
              <?php echo $this->Html->icon('bi bi-plus-lg text-white'); ?>
              <?=$this->Html->link(__('Add New Customer'), ['action' => 'add'], ['class' => 'text-white text-decoration-none']) ?>
         </div>
     </div>
 
     <div class="table-responsive">
-        <table id="test" class="table table-striped">
+<!-- ====More style use class table-striped ======-->
+        <table id="test" class="table table-hover">
             <thead>
             <tr>
                 <th class="table-header"><?= $this->Paginator->sort('id', 'Customer ID') ?></th>
@@ -49,10 +50,10 @@ $this->assign('title','Customers List');
                     <td><?= h($customer->phone_number) ?></td>
 
                     <td class="actions ">
-                        <?= $this->Html->link(('View'), ['action' => 'view', $customer->id] ,['class'=>'btn btn-primary py-0 me-2']) ?>
-                        <?= $this->Html->link(('Edit'), ['action' => 'edit', $customer->id],['class'=>'btn btn-success py-0 me-2']) ?>
+                        <?= $this->Html->link(('View'), ['action' => 'view', $customer->id] ,['class'=>'btn bg-view-btn py-0 me-2']) ?>
+                        <?= $this->Html->link(('Edit'), ['action' => 'edit', $customer->id],['class'=>'btn bg-edit-btn py-0 me-2']) ?>
 <!--                        <span class="deleted_button">-->
-                        <?= $this->Form->postLink('Deleted', ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'class'=>'btn btn-danger py-0 me-2']) ?>
+                        <?= $this->Form->postLink('Deleted', ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id), 'class'=>'btn bg-delete-btn py-0 me-2']) ?>
 <!--                        </span>-->
                     </td>
                 </tr>

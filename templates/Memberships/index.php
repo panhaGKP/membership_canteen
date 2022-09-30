@@ -20,14 +20,14 @@ $this->assign('title','Memberships List');
         </div>
     </div>
     <div class="flex-row-reverse d-flex">
-        <div class="btn mt-3 bg-success ">
+        <div class="btn mt-3 bg-add-btn ">
             <?php echo $this->Html->icon('bi bi-plus-lg text-white'); ?>
             <?= $this->Html->link(__('New Membership'), ['action' => 'add'], ['class' => 'text-decoration-none text-white']) ?>
         </div>
 
     </div>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th class="table-header"><?= $this->Paginator->sort('id', 'ID Number',['class'=>'hello']) ?></th>
@@ -58,9 +58,9 @@ $this->assign('title','Memberships List');
                         </td>
                     <?php }?>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action'=> 'view', $membership->id],['class'=>'btn btn-primary py-0 me-2']) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $membership->id],['class'=>'btn btn-success py-0 me-2 disabled']) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $membership->id], ['confirm' => __('Are you sure you want to delete # {0}?', $membership->id), 'class'=>'btn btn-danger py-0 me-2']) ?>
+                        <?= $this->Html->link(__('View'), ['action'=> 'view', $membership->id],['class'=>'btn bg-view-btn py-0 me-2']) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $membership->id],['class'=>'btn bg-edit-btn py-0 me-2 disabled']) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $membership->id], ['confirm' => __('Are you sure you want to delete # {0}?', $membership->id), 'class'=>'btn bg-delete-btn py-0 me-2']) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

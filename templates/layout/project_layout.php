@@ -83,6 +83,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             width: 60px;
         }
     </style>
+    <?php
+        echo $this->Html->css('main');
+    ?>
 </head>
 <body>
 <!--========Navigation bar element============-->

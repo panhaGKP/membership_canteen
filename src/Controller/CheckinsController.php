@@ -45,6 +45,8 @@ class CheckinsController extends AppController
      */
     public function view($id = null)
     {
+        $this->viewBuilder()->setLayout('project_layout');
+
         $checkin = $this->Checkins->get($id, [
             'contain' => ['Customers'],
         ]);
@@ -59,8 +61,6 @@ class CheckinsController extends AppController
      */
     public function addOldVersion()
     {
-        $this->viewBuilder()->setLayout('project_layout');
-
         $checkin = $this->Checkins->newEmptyEntity();
         if ($this->request->is('post')) {
 

@@ -8,13 +8,13 @@ $this->assign('title','Bundles List');
 <div class="bundles index content">
     <div class="d-flex  justify-content-between mt-3 mb-3">
         <h3><?= __('Bundles') ?></h3>
-        <div class="btn bg-success ">
+        <div class="btn bg-add-btn ">
             <?php echo $this->Html->icon('bi bi-plus-lg text-white'); ?>
             <?= $this->Html->link(__('New Bundle'), ['action' => 'add'], ['class' => 'text-white text-decoration-none']) ?>
         </div>
     </div>
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-hover">
             <thead>
                 <tr>
                     <th class="table-header"><?= $this->Paginator->sort('id') ?></th>
@@ -33,7 +33,7 @@ $this->assign('title','Bundles List');
                     <td><?= $this->Number->format($bundle->duration) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $bundle->id],['class'=>'btn btn-outline-success py-0 me-2 disabled']) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $bundle->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bundle->id),'class'=>'btn btn-danger py-0 me-2']) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $bundle->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bundle->id),'class'=>'btn bg-delete-btn py-0 me-2']) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
