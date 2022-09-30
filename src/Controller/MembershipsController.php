@@ -84,16 +84,6 @@ class MembershipsController extends AppController
             $duration = $bundle->duration;
             $membership->end_date = $membership->start_date->addDay($duration);
 
-
-            $today_date = date("Y-m-d");
-
-            if($membership->start_date->toDateString() <= $today_date && $membership->end_date->toDateString() >= $today_date){
-                $membership->is_active = true;
-            }else{
-                $membership->is_active = false;
-            }
-//            dd($membership->is_active);
-//            debug($membership);
             if ($this->Memberships->save($membership)) {
                 $this->Flash->success(__('The membership has been saved.'));
 

@@ -57,13 +57,6 @@ class MembershipsTable extends Table
             'foreignKey' => 'bundle_id',
             'joinType' => 'INNER',
         ]);
-
-        //new behaviors
-//        $this->addBehavior('Muffin/Trash.Trash', [
-//            'events' => ['Model.beforeFind'], // enables the beforeFind event only, false to disable both
-//            'dependent'=>true,
-//            'cascadeCallbacks'=>true
-//        ]);
     }
 
     /**
@@ -93,10 +86,6 @@ class MembershipsTable extends Table
             ->date('end_date')
             ->requirePresence('end_date', 'create')
             ->notEmptyDate('end_date');
-
-        $validator
-            ->boolean('is_active')
-            ->notEmptyString('is_active');
 
         $validator
             ->notEmptyString('deleted');
