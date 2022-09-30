@@ -6,6 +6,7 @@
  */
 
 //dd($this->request->getData());
+$this->assign('title','Choose Customer');
 ?>
 <div class="column-responsive column-80">
     <div class="checkins form content">

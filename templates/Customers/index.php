@@ -3,7 +3,8 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Customer[]|\Cake\Collection\CollectionInterface $customers
  */
-//$this->setLayout('layout');
+//$this->fetch('layout.ajax');
+$this->assign('title','Customers List');
 ?>
 <div class="customers index content">
     <div class="d-flex  justify-content-between">
@@ -16,9 +17,11 @@
             <?= $this->Form->end()?>
         </div>
     </div>
-    <div class="flex-row-reverse d-flex">
-
-        <?= $this->Html->link(__('Add New Customer'), ['action' => 'add'], ['class' => 'btn mt-3 bg-success text-white']) ?>
+    <div class="flex-row-reverse d-flex ">
+        <div class="btn mt-3 bg-success ">
+             <?php echo $this->Html->icon('bi bi-plus-lg text-white'); ?>
+             <?=$this->Html->link(__('Add New Customer'), ['action' => 'add'], ['class' => 'text-white text-decoration-none']) ?>
+        </div>
     </div>
 
     <div class="table-responsive">

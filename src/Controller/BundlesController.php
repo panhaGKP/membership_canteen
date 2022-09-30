@@ -22,6 +22,8 @@ class BundlesController extends AppController{
      */
     public function index()
     {
+        $this->viewBuilder()->setLayout('project_layout');
+
         $bundles = $this->paginate($this->Bundles);
 
         $this->set(compact('bundles'));
@@ -36,6 +38,8 @@ class BundlesController extends AppController{
      */
     public function view($id = null)
     {
+        $this->viewBuilder()->setLayout('project_layout');
+
         $bundle = $this->Bundles->get($id, [
             'contain' => ['Memberships'],
         ]);
@@ -50,6 +54,8 @@ class BundlesController extends AppController{
      */
     public function add()
     {
+        $this->viewBuilder()->setLayout('project_layout');
+
         $bundle = $this->Bundles->newEmptyEntity();
         if ($this->request->is('post')) {
 
@@ -75,6 +81,8 @@ class BundlesController extends AppController{
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->setLayout('project_layout');
+
         $bundle = $this->Bundles->get($id, [
             'contain' => [],
         ]);

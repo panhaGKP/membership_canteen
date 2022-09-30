@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Customer $customer
  */
+    $this->assign('title','Edit Customer');
 ?>
 <div class="row">
     <div class="column-responsive column-80">

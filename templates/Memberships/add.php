@@ -7,6 +7,7 @@
  */
 //    debug(getType($customers));
 //    debug(getType($this->request->getQuery()));
+    $this->assign('title','Add Membership');
 ?>
 <div class="row">
     <div class="column-responsive column-80">

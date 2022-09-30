@@ -10,7 +10,7 @@
 //    debug($active_memberships);
 //    debug($inactive_memberships);
 //    debug($memberships == null);
-
+    $this->assign('title','Search Customer');
 ?>
 <div class="checkins index content">
 

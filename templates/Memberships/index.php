@@ -5,6 +5,7 @@
  */
 //    echo date('m/d/Y');
 $today_date = date("Y-m-d");
+$this->assign('title','Memberships List');
 //echo $today_date;
 ?>
 
@@ -19,7 +20,10 @@ $today_date = date("Y-m-d");
         </div>
     </div>
     <div class="flex-row-reverse d-flex">
-        <?= $this->Html->link(__('New Membership'), ['action' => 'add'], ['class' => 'btn mt-3 bg-success text-white']) ?>
+        <div class="btn mt-3 bg-success ">
+            <?php echo $this->Html->icon('bi bi-plus-lg text-white'); ?>
+            <?= $this->Html->link(__('New Membership'), ['action' => 'add'], ['class' => 'text-decoration-none text-white']) ?>
+        </div>
 
     </div>
     <div class="table-responsive">

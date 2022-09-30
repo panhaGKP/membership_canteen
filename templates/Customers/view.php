@@ -3,7 +3,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Customer $customer
  */
+
     $today_date = date("Y-m-d");
+    $this->assign('title','Customer Details');
 ?>
 <div class="">
     <div class="container">

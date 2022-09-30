@@ -3,11 +3,15 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Bundle[]|\Cake\Collection\CollectionInterface $bundles
  */
+$this->assign('title','Bundles List');
 ?>
 <div class="bundles index content">
     <div class="d-flex  justify-content-between mt-3 mb-3">
         <h3><?= __('Bundles') ?></h3>
-        <?= $this->Html->link(__('New Bundle'), ['action' => 'add'], ['class' => 'btn btn-success']) ?>
+        <div class="btn bg-success ">
+            <?php echo $this->Html->icon('bi bi-plus-lg text-white'); ?>
+            <?= $this->Html->link(__('New Bundle'), ['action' => 'add'], ['class' => 'text-white text-decoration-none']) ?>
+        </div>
     </div>
     <div class="table-responsive">
         <table class="table table-striped">

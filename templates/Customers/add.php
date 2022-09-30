@@ -3,6 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Customer $customer
  */
+$this->assign('title','Add Customer');
 use BootstrapUI\View\Helper\FormHelper;
 ?>
 <?php $this->request->getData() ?>

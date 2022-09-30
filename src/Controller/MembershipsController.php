@@ -19,6 +19,8 @@ class MembershipsController extends AppController
      */
     public function index()
     {
+        $this->viewBuilder()->setLayout('project_layout');
+
         $this->paginate = [
             'contain' => ['Customers', 'Bundles'],
             'limit' => 10,
@@ -56,6 +58,8 @@ class MembershipsController extends AppController
      */
     public function view($id = null)
     {
+        $this->viewBuilder()->setLayout('project_layout');
+
         $membership = $this->Memberships->get($id, [
             'contain' => ['Customers', 'Bundles'],
         ]);
@@ -70,6 +74,8 @@ class MembershipsController extends AppController
      */
     public function add()
     {
+        $this->viewBuilder()->setLayout('project_layout');
+
         $membership = $this->Memberships->newEmptyEntity();
         if ($this->request->is('post')) {
 //            debug($membership);
@@ -105,6 +111,7 @@ class MembershipsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->setLayout('project_layout');
         $membership = $this->Memberships->get($id, [
             'contain' => [],
         ]);

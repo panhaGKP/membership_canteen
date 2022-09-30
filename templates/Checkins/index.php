@@ -4,12 +4,16 @@
  * @var \App\Model\Entity\Checkin[]|\Cake\Collection\CollectionInterface $checkins
  */
 //debug($checkins)
+$this->assign('title','Check-Ins List');
 ?>
 <div class="checkins index content">
     <div class="d-flex  justify-content-between mt-3 mb-3">
         <h3><?= __('Check-ins List') ?></h3>
         <div class="flex-row-reverse d-flex">
-            <?= $this->Html->link(__('New Checkin'), ['action' => 'chooseCustomer'], ['class' => 'btn btn-success']) ?>
+            <div class="btn bg-success ">
+                <?php echo $this->Html->icon('bi bi-plus-lg text-white'); ?>
+                <?= $this->Html->link(__('New Checkin'), ['action' => 'chooseCustomer'], ['class' => 'text-decoration-none text-white']) ?>
+            </div>
         </div>
     </div>
     <div class="table-responsive">

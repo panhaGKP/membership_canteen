@@ -20,7 +20,8 @@ class CheckinsController extends AppController
      */
 
     public function index()
-    {
+    {        $this->viewBuilder()->setLayout('project_layout');
+
         //customize show limit option and order
         $this->paginate = [
             'contain' => ['Customers'],
@@ -58,6 +59,8 @@ class CheckinsController extends AppController
      */
     public function addOldVersion()
     {
+        $this->viewBuilder()->setLayout('project_layout');
+
         $checkin = $this->Checkins->newEmptyEntity();
         if ($this->request->is('post')) {
 
@@ -94,6 +97,8 @@ class CheckinsController extends AppController
     } //add old version
     public function add() // new version
     {
+        $this->viewBuilder()->setLayout('project_layout');
+
         $data =$this->request->getQuery();
         $data['customer_id'] = intval($data['customer_id']);
         $data['membership_id'] = $data['membership_id'] == 'null'? null : intval($data['membership_id']);
@@ -120,6 +125,8 @@ class CheckinsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->viewBuilder()->setLayout('project_layout');
+
         $checkin = $this->Checkins->get($id, [
             'contain' => [],
         ]);
@@ -156,6 +163,8 @@ class CheckinsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
     public function chooseCustomer(){
+        $this->viewBuilder()->setLayout('project_layout');
+
         if($this->request->is('post')){
             $data = $this->request->getData();
             dd($data);
@@ -164,6 +173,8 @@ class CheckinsController extends AppController
         $this->set(compact('customers'));
     }
     public function searchMemberships(){
+        $this->viewBuilder()->setLayout('project_layout');
+
         /**
          * @var \Cake\Collection\CollectionInterface|string[] $membership
          */
