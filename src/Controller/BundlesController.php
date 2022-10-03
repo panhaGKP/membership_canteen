@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
+
 /**
  * Bundles Controller
  *
@@ -10,7 +12,10 @@ namespace App\Controller;
  * @method \App\Model\Entity\Bundle[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class BundlesController extends AppController{
-
+    public function beforeFilter(EventInterface $event)
+    {
+        $this->viewBuilder()->setLayout('project_layout');
+    }
 
     public $paginate =[
             'limit'=> 5,
@@ -22,7 +27,6 @@ class BundlesController extends AppController{
      */
     public function index()
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $bundles = $this->paginate($this->Bundles);
 
@@ -38,7 +42,6 @@ class BundlesController extends AppController{
      */
     public function view($id = null)
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $bundle = $this->Bundles->get($id, [
             'contain' => ['Memberships'],
@@ -54,7 +57,6 @@ class BundlesController extends AppController{
      */
     public function add()
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $bundle = $this->Bundles->newEmptyEntity();
         if ($this->request->is('post')) {
@@ -81,7 +83,6 @@ class BundlesController extends AppController{
      */
     public function edit($id = null)
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $bundle = $this->Bundles->get($id, [
             'contain' => [],

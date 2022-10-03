@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Core\App;
+use Cake\Event\EventInterface;
 
 /**
  * Checkins Controller
@@ -13,6 +14,10 @@ use Cake\Core\App;
  */
 class CheckinsController extends AppController
 {
+    public function beforeFilter(EventInterface $event)
+    {
+        $this->viewBuilder()->setLayout('project_layout');
+    }
     /**
      * Index method
      *
@@ -20,7 +25,7 @@ class CheckinsController extends AppController
      */
 
     public function index()
-    {        $this->viewBuilder()->setLayout('project_layout');
+    {
 
         //customize show limit option and order
         $this->paginate = [
@@ -45,7 +50,6 @@ class CheckinsController extends AppController
      */
     public function view($id = null)
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $checkin = $this->Checkins->get($id, [
             'contain' => ['Customers'],
@@ -97,7 +101,6 @@ class CheckinsController extends AppController
     } //add old version
     public function add() // new version
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $data =$this->request->getQuery();
         $data['customer_id'] = intval($data['customer_id']);
@@ -125,7 +128,6 @@ class CheckinsController extends AppController
      */
     public function edit($id = null)
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $checkin = $this->Checkins->get($id, [
             'contain' => [],
@@ -173,7 +175,6 @@ class CheckinsController extends AppController
         $this->set(compact('customers'));
     }
     public function searchMemberships(){
-        $this->viewBuilder()->setLayout('project_layout');
 
         /**
          * @var \Cake\Collection\CollectionInterface|string[] $membership

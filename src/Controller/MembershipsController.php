@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
+
 /**
  * Memberships Controller
  *
@@ -11,6 +13,10 @@ namespace App\Controller;
  */
 class MembershipsController extends AppController
 {
+    public function beforeFilter(EventInterface $event)
+    {
+        $this->viewBuilder()->setLayout('project_layout');
+    }
 
     /**
      * Index method
@@ -19,7 +25,6 @@ class MembershipsController extends AppController
      */
     public function index()
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $this->paginate = [
             'contain' => ['Customers', 'Bundles'],
@@ -58,7 +63,6 @@ class MembershipsController extends AppController
      */
     public function view($id = null)
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $membership = $this->Memberships->get($id, [
             'contain' => ['Customers', 'Bundles'],
@@ -74,7 +78,6 @@ class MembershipsController extends AppController
      */
     public function add()
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $membership = $this->Memberships->newEmptyEntity();
         if ($this->request->is('post')) {
@@ -111,7 +114,6 @@ class MembershipsController extends AppController
      */
     public function edit($id = null)
     {
-        $this->viewBuilder()->setLayout('project_layout');
         $membership = $this->Memberships->get($id, [
             'contain' => [],
         ]);

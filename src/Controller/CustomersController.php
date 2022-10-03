@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
-
+use Cake\Event\EventInterface;
 /**
  * Customers Controller
  *
@@ -11,6 +11,15 @@ namespace App\Controller;
  */
 class CustomersController extends AppController
 {
+    /**
+     * @param EventInterface $event
+     * @return \Cake\Http\Response|void|null to change the default layout of Cakephp, Use this beforeFilter function
+     */
+    public function beforeFilter(EventInterface $event)
+    {
+        $this->viewBuilder()->setLayout('project_layout');
+    }
+
     public $paginate =[
         'limit'=>10,
         'order'=>[
@@ -24,7 +33,6 @@ class CustomersController extends AppController
      */
     public function index()
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $searchText = $this->request->getQuery('searchText');
         if($searchText){
@@ -47,7 +55,6 @@ class CustomersController extends AppController
      */
     public function view($id = null)
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $customer = $this->Customers->get($id, [
             'contain' => ['Checkins'=>'Memberships', 'Memberships'=>'Bundles'],
@@ -68,7 +75,6 @@ class CustomersController extends AppController
      */
     public function add()
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $customer = $this->Customers->newEmptyEntity();
         if ($this->request->is('post')) {
@@ -103,7 +109,6 @@ class CustomersController extends AppController
      */
     public function edit($id = null)
     {
-        $this->viewBuilder()->setLayout('project_layout');
 
         $customer = $this->Customers->get($id, [
             'contain' => [],
