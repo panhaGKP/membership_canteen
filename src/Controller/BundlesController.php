@@ -89,6 +89,8 @@ class BundlesController extends AppController{
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $bundle = $this->Bundles->patchEntity($bundle, $this->request->getData());
+            $bundle->price = $bundle->price*100;
+
             if ($this->Bundles->save($bundle)) {
                 $this->Flash->success(__('The bundle has been saved.'));
 

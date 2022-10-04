@@ -11,6 +11,16 @@
 //    debug($inactive_memberships);
 //    debug($memberships == null);
     $this->assign('title','Search Customer');
+$this->Breadcrumbs->add([
+    ['title'=>'List Check-ins', 'url'=>['controller'=>'checkins','action'=>'index']],
+    ['title'=>
+        'Choose Customer',
+        'url'=>['controller'=>'checkins','action'=>'chooseCustomer'],
+        'option'=>['class'=>'active']],
+    ['title'=>
+        'Search Memberships',
+        'option'=>['class'=>'active']],
+]);
 ?>
 <div class="checkins index content">
 

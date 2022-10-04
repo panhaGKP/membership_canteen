@@ -20,12 +20,6 @@ class CustomersController extends AppController
         $this->viewBuilder()->setLayout('project_layout');
     }
 
-    public $paginate =[
-        'limit'=>10,
-        'order'=>[
-            'id'=>'desc'
-        ]
-    ];
     /**
      * Index method
      *
@@ -38,11 +32,12 @@ class CustomersController extends AppController
         if($searchText){
             $list_user = $this->Customers->find('all')
                                          ->where(['or'=>['name like'=>'%'.$searchText.'%','phone_number like'=>'%'.$searchText.'%']]);
+//            $list_user = $this->Customers->findAllByNameOrPhoneNumber('%'.$searchText.'%', '%'.$searchText.'%');
         }else{
             $list_user = $this->Customers;
         }
+//        $customers = $this->paginate($list_user,['limit'=>'10']);
         $customers = $this->paginate($list_user);
-
         $this->set(compact('customers'));
     }
 
@@ -63,9 +58,12 @@ class CustomersController extends AppController
          * @var \App\Model\Entity\Bundle $bundle
          */
 
-//        dd($customer);
-        $this->set(compact('customer'));
-//        $this->set('bundle_name','VIP');
+        $memberships = $this->Customers->Memberships->find('all')
+                                                    ->order('Memberships.id DESC')
+                                                    ->where('Memberships.customer_id ='.$id)->toArray();
+        $this->set('customer', $customer);
+//        $this->set('memberships', $memberships);
+
     }
 
     /**

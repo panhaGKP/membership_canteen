@@ -3,6 +3,13 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Bundle $bundle
  */
+$this->Breadcrumbs->add([
+    ['title'=>'List Bundles', 'url'=>['controller'=>'bundles','action'=>'index']],
+    ['title'=>
+        'Edit',
+        'url'=>['controller'=>'bundles','action'=>'edit',$bundle->id],
+        'option'=>['class'=>'active']]
+]);
 ?>
 <div class="row">
     <div class="column-responsive column-80">

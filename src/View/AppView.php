@@ -18,6 +18,7 @@ namespace App\View;
 use BootstrapUI\View\UIView;
 use BootstrapUI\View\UIViewTrait;
 use Cake\View\View;
+use BootstrapUI\View\Helper\BreadcrumbsHelper;
 
 /**
  * Application View
@@ -42,6 +43,7 @@ class AppView extends View
     public function initialize(): void
     {
         parent::initialize();
+//        $this->loadHelper('Breadcrumbs');
         $this->initializeUI(['layout' => false]);
     }
 }

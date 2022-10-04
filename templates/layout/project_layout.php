@@ -90,8 +90,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
 <!--========Navigation bar element============-->
 <?= $this->element('navigationbar') ?>
+
 <main class="main ">
+
     <div class="container">
+        <div class="bg-light pt-1 ps-1">
+            <?= $this->Breadcrumbs->render(); ?>
+        </div>
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
     </div>

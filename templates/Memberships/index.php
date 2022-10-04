@@ -7,6 +7,8 @@
 $today_date = date("Y-m-d");
 $this->assign('title','Memberships List');
 //echo $today_date;
+
+$this->Breadcrumbs->add('List Memberships', ['controller'=>'memberships','action'=>'index']);
 ?>
 
 <div class="memberships index content">

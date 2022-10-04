@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Bundle[]|\Cake\Collection\CollectionInterface $bundles
  */
 $this->assign('title','Bundles List');
+$this->Breadcrumbs->add('List Bundles',['controller'=>'bundle','action'=>'index']);
 ?>
 <div class="bundles index content">
     <div class="d-flex  justify-content-between mt-3 mb-3">
@@ -32,7 +33,7 @@ $this->assign('title','Bundles List');
                     <td><?= h($this->Number->format($bundle->price/100)) ?></td>
                     <td><?= $this->Number->format($bundle->duration) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $bundle->id],['class'=>'btn btn-outline-success py-0 me-2 disabled']) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $bundle->id],['class'=>'btn btn-outline-success py-0 me-2 ']) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $bundle->id], ['confirm' => __('Are you sure you want to delete # {0}?', $bundle->id),'class'=>'btn bg-delete-btn py-0 me-2']) ?>
                     </td>
                 </tr>

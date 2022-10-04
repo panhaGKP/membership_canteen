@@ -6,10 +6,16 @@
 
     $today_date = date("Y-m-d");
     $this->assign('title','Customer Details');
+    $this->Breadcrumbs->add([
+        ['title'=>'List Customers', 'url'=>['controller'=>'customers','action'=>'index']],
+        ['title'=>
+            'View',
+            'url'=>['controller'=>'customers','action'=>'view',$customer->id],
+            'option'=>['class'=>'active']]
+    ]);
 ?>
 <div class="">
     <div class="container">
-
             <div class="row gutters-sm">
                 <div class="col-md-4 mb-3">
                     <h4 class=" h3 ms-2">Customer Profile</h4>
@@ -122,34 +128,37 @@
                     <h4 class="h3 mt-5 mb-3 ms-2">Check-ins Information</h4>
                     <div class="card mb-3 shadow-sm py-0 px-2 w-75">
                         <?php if (!empty($customer->checkins)) : ?>
-                            <div class="">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th><?= __('Check-in Id') ?></th>
+                        <div class="">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th><?= __('Check-in ID')?></th>
 
-                                            <th><?= __('Date') ?></th>
-                                            <th><?= __('Membership ID') ?></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php foreach ($customer->checkins as $checkin) : ?>
-                                        <tr>
-                                            <td><?= h($checkin->id) ?></td>
-                                            <td><?= h($checkin->created->toDateString()) ?></td>
+                                        <th><?= __('Date') ?></th>
+                                        <th><?= __('Time') ?></th>
+                                        <th><?= __('Membership ID') ?></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php foreach ($customer->checkins as $checkin) : ?>
+                                    <tr>
+                                        <td><?= h($checkin->id) ?></td>
+                                        <td><?= h($checkin->created->toDateString()) ?></td>
+                                        <td><?= h($checkin->created->format('h:i a')) ?></td>
 
-                                            <?php if($checkin->membership_id == null){?>
-                                                <td><?= h('N/A') ?></td>
-                                            <?php }else{?>
-                                                <td><?= h($checkin->membership_id) ?></td>
-                                            <?php }?>
+                                        <?php if($checkin->membership_id == null){?>
+                                            <td><?= h('N/A') ?></td>
+                                        <?php }else{?>
+                                            <td><?= h($checkin->membership_id) ?></td>
+                                        <?php }?>
 
-                                        </tr>
-                                    <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                         <?php endif; ?>
+
                     </div>
                 </div>
             </div>

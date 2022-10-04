@@ -4,6 +4,13 @@
  * @var \App\Model\Entity\Customer $customer
  */
     $this->assign('title','Edit Customer');
+    $this->Breadcrumbs->add([
+        ['title'=>'List Customers', 'url'=>['controller'=>'customers','action'=>'index']],
+        ['title'=>
+            'Edit',
+            'url'=>['controller'=>'customers','action'=>'edit',$customer->id],
+            'option'=>['class'=>'active']]
+    ]);
 ?>
 <div class="row">
     <div class="column-responsive column-80">

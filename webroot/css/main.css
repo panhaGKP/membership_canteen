@@ -16,3 +16,12 @@
     background-color: #f34011;
     color: white;
 }
+.breadcrumb-item a{
+    text-decoration: none;
+}
+.breadcrumb-item a:hover{
+    text-decoration: underline;
+}
+.active a{
+    color: #000000;
+}

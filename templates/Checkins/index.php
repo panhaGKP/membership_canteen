@@ -5,6 +5,7 @@
  */
 //debug($checkins)
 $this->assign('title','Check-Ins List');
+$this->Breadcrumbs->add('List Check-ins',['controller'=>'checkins','action'=>'index']);
 ?>
 <div class="checkins index content">
     <div class="d-flex  justify-content-between mt-3 mb-3">

@@ -4,6 +4,13 @@
  * @var \App\Model\Entity\Checkin $checkin
  */
 $this->assign('title','Check-In Details');
+$this->Breadcrumbs->add([
+    ['title'=>'List Check-ins', 'url'=>['controller'=>'checkins','action'=>'index']],
+    ['title'=>
+        'View',
+        'url'=>['controller'=>'checkins','action'=>'view',$checkin->id],
+        'option'=>['class'=>'active']]
+]);
 ?>
 <div class="w-50">
     <h4 class="h3 mt-5 mb-3 ms-2">View Check-in</h4>

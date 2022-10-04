@@ -4,6 +4,14 @@
  * @var \App\Model\Entity\Customer $customer
  */
 $this->assign('title','Add Customer');
+
+$this->Breadcrumbs->add([
+    ['title'=>'List Customers', 'url'=>['controller'=>'customers','action'=>'index']],
+    ['title'=>
+        'Add',
+        'url'=>['controller'=>'customers','action'=>'add'],
+        'option'=>['class'=>'active']]
+]);
 use BootstrapUI\View\Helper\FormHelper;
 ?>
 <?php $this->request->getData() ?>
