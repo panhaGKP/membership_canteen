@@ -46,8 +46,8 @@ $this->Breadcrumbs->add([
             foreach ($active_memberships as $membership): ?>
                 <tr>
                     <td><?= $this->Number->format($membership->id) ?></td>
-                    <td><?= h($membership->start_date) ?></td>
-                    <td><?= h($membership->end_date) ?></td>
+                    <td><?= h($membership->start_date->format('d/m/Y')) ?></td>
+                    <td><?= h($membership->end_date->format('d/m/Y')) ?></td>
 
                     <td style="">
                         <div style="display: inline-block;border: 1px solid #6eec5a; background-color: #6eec5a; color: white; padding: 0 10px; border-radius: 1rem"> Active</div>
@@ -60,8 +60,8 @@ $this->Breadcrumbs->add([
                 foreach ($inactive_memberships as $membership):
             ?><tr>
                 <td><?= $this->Number->format($membership->id) ?></td>
-                <td><?= h($membership->start_date) ?></td>
-                <td><?= h($membership->end_date) ?></td>
+                <td><?= h($membership->start_date->format('d/m/Y')) ?></td>
+                <td><?= h($membership->end_date->format('d/m/Y')) ?></td>
 
                 <td style="">
                     <div style="display: inline-block;border: 1px solid gray; background-color: gray; color: white; padding: 0 10px; border-radius: 1rem"> Inactive</div>

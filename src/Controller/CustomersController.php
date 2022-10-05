@@ -163,4 +163,17 @@ class CustomersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    public function search()
+    {
+        $this->viewBuilder()->setLayout('ajax');
+        $this->request->allowMethod(['ajax', 'get']);
+
+        $keyword = $this->request->getQuery('keyword');
+//        dd($keyword);
+        $query = $this->Customers->find('all')
+                                 ->where(['or'=>['name like'=>'%'.$keyword.'%','phone_number like'=>'%'.$keyword.'%']]);
+
+        $this->set('customers', $this->paginate($query));
+//        $this->set('_serialize', ['customers']);
+    }
 }

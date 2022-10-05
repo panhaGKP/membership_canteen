@@ -53,6 +53,8 @@ class CustomersTable extends Table
         ]);
         $this->hasMany('Memberships', [
             'foreignKey' => 'customer_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
         // new behavior
         $this->addBehavior('Muffin/Trash.Trash',[]);

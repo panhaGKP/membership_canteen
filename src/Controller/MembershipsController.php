@@ -18,6 +18,27 @@ class MembershipsController extends AppController
         $this->viewBuilder()->setLayout('project_layout');
     }
 
+    public function search()
+    {
+        $this->request->allowMethod(['ajax']);
+
+        $keyword = $this->request->getQuery('keyword');
+        //debug($keyword);
+        $membership_list = $this->Memberships->find()
+            ->contain(['Customers'])
+            ->where([
+                'or' => [
+                    'Customers.name like' => '%' . $keyword . '%',
+                    'Customers.phone_number like' => '%' . $keyword . '%'
+                ]
+            ]);
+
+        $memberships = $this->paginate($membership_list);
+//        debug($memberships);
+
+        $this->set('memberships', $memberships);
+    }
+
     /**
      * Index method
      *
@@ -29,22 +50,22 @@ class MembershipsController extends AppController
         $this->paginate = [
             'contain' => ['Customers', 'Bundles'],
             'limit' => 10,
-            'order'=>[
-                'id'=>'asc'
+            'order' => [
+                'id' => 'asc'
             ]
 
         ];
 
         $searchText = $this->request->getQuery('searchText');
 
-        if($searchText){
+        if ($searchText) {
             $searchText = trim($searchText);
-            $membership_id = $this->Memberships->Customers->find()->select('id')->where(['or'=>['name like'=>'%'.$searchText.'%','phone_number like'=>'%'.$searchText.'%']]);
+            $membership_id = $this->Memberships->Customers->find()->select('id')->where(['or' => ['name like' => '%' . $searchText . '%', 'phone_number like' => '%' . $searchText . '%']]);
 //            dd($membership_id);
-            $membership_list = $this->Memberships->find()->where(['customer_id in'=> $membership_id]);
+            $membership_list = $this->Memberships->find()->where(['customer_id in' => $membership_id]);
 //            dd($membership_list);
 
-        }else{
+        } else {
 
             $membership_list = $this->Memberships;
         }
