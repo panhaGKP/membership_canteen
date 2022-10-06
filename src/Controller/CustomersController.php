@@ -27,7 +27,14 @@ class CustomersController extends AppController
      */
     public function index()
     {
-
+        //customize show limit option and order
+        /*$this->paginate = [
+            'contain' => ['Customers'],
+            'limit' => 10,
+            'order'=>[
+                'id'=>'desc'
+            ]
+        ];*/
         $searchText = $this->request->getQuery('searchText');
         if($searchText){
             $list_user = $this->Customers->find('all')
@@ -37,7 +44,11 @@ class CustomersController extends AppController
             $list_user = $this->Customers;
         }
 //        $customers = $this->paginate($list_user,['limit'=>'10']);
-        $customers = $this->paginate($list_user);
+        $customers = $this->paginate($list_user,[
+            'order' => [
+                'id' => 'desc'
+            ]
+        ]);
         $this->set(compact('customers'));
     }
 
@@ -79,18 +90,21 @@ class CustomersController extends AppController
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
             if(!$customer->getErrors){
                 $profile_picture = $this->request->getData('profile_picture');
-                $profile_picture_name = $profile_picture->getClientFilename();
-
-                if( ! is_dir(WWW_ROOT.'img'.DS.'customers_picture')){
-                    mkdir(WWW_ROOT.'img'.DS.'customers_picture', 0775);
+//                dd($profile_picture);
+                $profile_picture_name = $profile_picture['name'];
+                $customer->profile_picture = 'no image';
+//                dd($profile_picture_name);
+                if($profile_picture_name != null){
+                    if( ! is_dir(WWW_ROOT.'img'.DS.'customers_picture')){
+                        mkdir(WWW_ROOT.'img'.DS.'customers_picture', 0775);
+                    }
+                    $targetPath = WWW_ROOT.'img'.DS.'customers_picture'.DS.$profile_picture_name;
+                    move_uploaded_file($profile_picture['name'], $targetPath);
+                    $customer->profile_picture = 'customers_picture/'.$profile_picture_name;
                 }
-                $targetPath = WWW_ROOT.'img'.DS.'customers_picture'.DS.$profile_picture_name;
-                if ($profile_picture_name) $profile_picture->moveTo($targetPath);
-                $customer->profile_picture = 'customers_picture/'.$profile_picture_name;
             }
             if ($this->Customers->save($customer)) {
                 $this->Flash->success(__('The customer has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The customer could not be saved. Please, try again.'));
@@ -115,17 +129,15 @@ class CustomersController extends AppController
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
             if(!$customer->getErrors){
                 $profile_picture = $this->request->getData('profile_picture');
-                $profile_picture_name = $profile_picture->getClientFilename();
-                if ($profile_picture_name){
+                $profile_picture_name = $profile_picture['name'];
+                $customer->profile_picture = 'no image';
+                if ($profile_picture_name!=null){
                     if( ! is_dir(WWW_ROOT.'img'.DS.'customers_picture')){
                         mkdir(WWW_ROOT.'img'.DS.'customers_picture', 0775);
                     }
                     $targetPath = WWW_ROOT.'img'.DS.'customers_picture'.DS.$profile_picture_name;
-                    $profile_picture->moveTo($targetPath);
-
+                    move_uploaded_file($profile_picture['name'], $targetPath);
                     $previous_profile_picture_path = WWW_ROOT.'img'.DS.$customer->profile_picture;
-//                    $previous_profile_picture_path = $customer->profile_picture;
-//                    debug($previous_profile_picture_path);
                     if(file_exists($previous_profile_picture_path)){
                         echo 'true';
                         unlink($previous_profile_picture_path);

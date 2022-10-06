@@ -6,28 +6,16 @@
             <thead>
             <tr>
                 <th class="table-header">
-                    <?= $this->Paginator->sort('id', 'Customer ID') ?>
-                    <?php if($this->request->getQuery('sort')=='id') {?>
-                        <i class="bi bi-arrow-<?= $this->request->getQuery('direction')== 'desc'? 'down':'up'?>"></i>
-                    <?php } ?>
+                    Customer ID
                 </th>
                 <th class="table-header">
-                    <?= $this->Paginator->sort('name') ?>
-                    <?php if($this->request->getQuery('sort')=='name') {?>
-                        <i class="bi bi-arrow-<?= $this->request->getQuery('direction')== 'desc'? 'down':'up'?>"></i>
-                    <?php } ?>
+                    Name
                 </th>
                 <th class="table-header">
-                    <?= $this->Paginator->sort('gender') ?>
-                    <?php if($this->request->getQuery('sort')=='gender') {?>
-                        <i class="bi bi-arrow-<?= $this->request->getQuery('direction')== 'desc'? 'down':'up'?>"></i>
-                    <?php } ?>
+                    Gender
                 </th>
                 <th class="table-header">
-                    <?= $this->Paginator->sort('phone_number') ?>
-                    <?php if($this->request->getQuery('sort')=='phone_number') {?>
-                        <i class="bi bi-arrow-<?= $this->request->getQuery('direction')== 'desc'? 'down':'up'?>"></i>
-                    <?php } ?>
+                    Phone Number
                 </th>
 
                 <th class="actions"><?= ('Actions') ?></th>

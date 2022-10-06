@@ -16,11 +16,11 @@ $today_date = date("Y-m-d");
         <table class="table table-hover">
             <thead>
             <tr>
-                <th class="table-header"><?= $this->Paginator->sort('id', 'ID Number',['class'=>'hello']) ?></th>
-                <th class="table-header"><?= $this->Paginator->sort('customer_id', 'Customer Name') ?></th>
-                <th class="table-header"><?= $this->Paginator->sort('gender') ?></th>
-                <th class="table-header"><?= $this->Paginator->sort('customer_id', 'Phone Number') ?></th>
-                <th class="table-header"><?= h('Status')?></th>
+                <th class="table-header">ID Number</th>
+                <th class="table-header">Customer Name</th>
+                <th class="table-header">Gender</th>
+                <th class="table-header">Phone Number</th>
+                <th class="table-header">Status</th>
                 <th class="actions"><?= __('Actions') ?></th>
             </tr>
             </thead>

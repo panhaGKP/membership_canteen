@@ -53,7 +53,6 @@ class MembershipsController extends AppController
             'order' => [
                 'id' => 'asc'
             ]
-
         ];
 
         $searchText = $this->request->getQuery('searchText');

@@ -13,6 +13,10 @@
             'url'=>['controller'=>'customers','action'=>'view',$customer->id],
             'option'=>['class'=>'active']]
     ]);
+    $gender_image = $customer->gender=='m'? 'man.png':'woman.png';
+    $default_profile_picture_path = 'default_profile_picture/'. $gender_image;
+//    debug($default_profile_picture_path);
+//    debug($customer->profile_picture);
 ?>
 <div class="">
     <div class="container">
@@ -25,7 +29,7 @@
                         <div class="card-body shadow">
                             <div class="d-flex flex-column align-items-center text-center">
 <!--                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">-->
-                                <?= $this->Html->image($customer->profile_picture,['class'=>' border border-2 profile_picture rounded-circle'])?>
+                                <?= $this->Html->image($customer->profile_picture == 'no image'? $default_profile_picture_path :$customer->profile_picture,['class'=>' border border-2 profile_picture rounded-circle'])?>
                                 <div class="mt-3">
                                     <h4><?= h($customer->name)?></h4>
                                     <p class="text-secondary mb-1"><?= h($customer->phone_number)?></p>
