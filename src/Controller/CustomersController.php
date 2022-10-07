@@ -19,6 +19,15 @@ class CustomersController extends AppController
     {
         $this->viewBuilder()->setLayout('project_layout');
     }
+    public function deleteAll(){
+        $this->request->allowMethod(['post','delete']);
+        $ids = $this->request->getData('ids');
+        if($this->Customers->deleteAll(['Customer.id IN'=>$ids])){
+            $this->Flash->success(__('The customers has been deleted.'));
+        }
+        return $this->redirect(['action'=>'index']);
+//        exit('Hello');
+    }
 
     /**
      * Index method

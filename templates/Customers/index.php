@@ -24,7 +24,13 @@
         </div>
 
     </div>
-    <div class="d-flex flex-row-reverse ">
+
+<!--    <div class="collapse" id="collapseExample">-->
+<!--        <div class="card card-body">-->
+<!--            Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.-->
+<!--        </div>-->
+<!--    </div>-->
+    <div class="d-flex flex-row-reverse">
         <div class="btn mt-3 bg-add-btn">
              <?php echo $this->Html->icon('bi bi-plus-lg text-white'); ?>
              <?=$this->Html->link(__('Add New Customer'), ['action' => 'add'], ['class' => 'text-white text-decoration-none']) ?>
@@ -34,7 +40,6 @@
     <div class="table-content">
         <div class="table-responsive">
             <!-- ====More style use class table-striped ======-->
-
             <table id="test" class="table table-hover">
                 <thead>
                 <tr>
@@ -89,6 +94,7 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
+            <?= $this->Form->end() ?>
 
         </div>
         <div class="paginator d-flex justify-content-between">
