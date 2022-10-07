@@ -4,6 +4,14 @@
  * @var \App\Model\Entity\Membership $membership
  */
     $today_date = date("Y-m-d");
+    $this->assign('title','Membership Details');
+    $this->Breadcrumbs->add([
+        ['title'=>'List Membership', 'url'=>['controller'=>'memberships','action'=>'index']],
+        ['title'=>
+            'View',
+            'url'=>['controller'=>'memberships','action'=>'view',$membership->id],
+            'option'=>['class'=>'active']]
+    ]);
 ?>
 <div class="w-50">
     <h4 class="h3 mt-5 mb-3 ms-2">View Membership</h4>

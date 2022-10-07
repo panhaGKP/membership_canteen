@@ -37,7 +37,6 @@ class Membership extends Entity
         'bundle_id' => true,
         'start_date' => true,
         'end_date' => true,
-        'is_active' => true,
         'deleted' => true,
         'created' => true,
         'modified' => true,

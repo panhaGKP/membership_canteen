@@ -10,7 +10,17 @@
 //    debug($active_memberships);
 //    debug($inactive_memberships);
 //    debug($memberships == null);
-
+    $this->assign('title','Search Customer');
+$this->Breadcrumbs->add([
+    ['title'=>'List Check-ins', 'url'=>['controller'=>'checkins','action'=>'index']],
+    ['title'=>
+        'Choose Customer',
+        'url'=>['controller'=>'checkins','action'=>'chooseCustomer'],
+        'option'=>['class'=>'active']],
+    ['title'=>
+        'Search Memberships',
+        'option'=>['class'=>'active']],
+]);
 ?>
 <div class="checkins index content">
 
@@ -36,8 +46,8 @@
             foreach ($active_memberships as $membership): ?>
                 <tr>
                     <td><?= $this->Number->format($membership->id) ?></td>
-                    <td><?= h($membership->start_date) ?></td>
-                    <td><?= h($membership->end_date) ?></td>
+                    <td><?= h($membership->start_date->format('d/m/Y')) ?></td>
+                    <td><?= h($membership->end_date->format('d/m/Y')) ?></td>
 
                     <td style="">
                         <div style="display: inline-block;border: 1px solid #6eec5a; background-color: #6eec5a; color: white; padding: 0 10px; border-radius: 1rem"> Active</div>
@@ -50,8 +60,8 @@
                 foreach ($inactive_memberships as $membership):
             ?><tr>
                 <td><?= $this->Number->format($membership->id) ?></td>
-                <td><?= h($membership->start_date) ?></td>
-                <td><?= h($membership->end_date) ?></td>
+                <td><?= h($membership->start_date->format('d/m/Y')) ?></td>
+                <td><?= h($membership->end_date->format('d/m/Y')) ?></td>
 
                 <td style="">
                     <div style="display: inline-block;border: 1px solid gray; background-color: gray; color: white; padding: 0 10px; border-radius: 1rem"> Inactive</div>

@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 namespace App\Controller;
-
+use Cake\Event\EventInterface;
 /**
  * Customers Controller
  *
@@ -11,12 +11,24 @@ namespace App\Controller;
  */
 class CustomersController extends AppController
 {
-    public $paginate =[
-        'limit'=>10,
-        'order'=>[
-            'id'=>'desc'
-        ]
-    ];
+    /**
+     * @param EventInterface $event
+     * @return \Cake\Http\Response|void|null to change the default layout of Cakephp, Use this beforeFilter function
+     */
+    public function beforeFilter(EventInterface $event)
+    {
+        $this->viewBuilder()->setLayout('project_layout');
+    }
+    public function deleteAll(){
+        $this->request->allowMethod(['post','delete']);
+        $ids = $this->request->getData('ids');
+        if($this->Customers->deleteAll(['Customer.id IN'=>$ids])){
+            $this->Flash->success(__('The customers has been deleted.'));
+        }
+        return $this->redirect(['action'=>'index']);
+//        exit('Hello');
+    }
+
     /**
      * Index method
      *
@@ -24,15 +36,28 @@ class CustomersController extends AppController
      */
     public function index()
     {
+        //customize show limit option and order
+        /*$this->paginate = [
+            'contain' => ['Customers'],
+            'limit' => 10,
+            'order'=>[
+                'id'=>'desc'
+            ]
+        ];*/
         $searchText = $this->request->getQuery('searchText');
         if($searchText){
             $list_user = $this->Customers->find('all')
                                          ->where(['or'=>['name like'=>'%'.$searchText.'%','phone_number like'=>'%'.$searchText.'%']]);
+//            $list_user = $this->Customers->findAllByNameOrPhoneNumber('%'.$searchText.'%', '%'.$searchText.'%');
         }else{
             $list_user = $this->Customers;
         }
-        $customers = $this->paginate($list_user);
-
+//        $customers = $this->paginate($list_user,['limit'=>'10']);
+        $customers = $this->paginate($list_user,[
+            'order' => [
+                'id' => 'desc'
+            ]
+        ]);
         $this->set(compact('customers'));
     }
 
@@ -45,6 +70,7 @@ class CustomersController extends AppController
      */
     public function view($id = null)
     {
+
         $customer = $this->Customers->get($id, [
             'contain' => ['Checkins'=>'Memberships', 'Memberships'=>'Bundles'],
         ]);
@@ -52,9 +78,12 @@ class CustomersController extends AppController
          * @var \App\Model\Entity\Bundle $bundle
          */
 
-//        dd($customer);
-        $this->set(compact('customer'));
-//        $this->set('bundle_name','VIP');
+        $memberships = $this->Customers->Memberships->find('all')
+                                                    ->order('Memberships.id DESC')
+                                                    ->where('Memberships.customer_id ='.$id)->toArray();
+        $this->set('customer', $customer);
+//        $this->set('memberships', $memberships);
+
     }
 
     /**
@@ -64,23 +93,27 @@ class CustomersController extends AppController
      */
     public function add()
     {
+
         $customer = $this->Customers->newEmptyEntity();
         if ($this->request->is('post')) {
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
             if(!$customer->getErrors){
                 $profile_picture = $this->request->getData('profile_picture');
-                $profile_picture_name = $profile_picture->getClientFilename();
-
-                if( ! is_dir(WWW_ROOT.'img'.DS.'customers_picture')){
-                    mkdir(WWW_ROOT.'img'.DS.'customers_picture', 0775);
+//                dd($profile_picture);
+                $profile_picture_name = $profile_picture['name'];
+                $customer->profile_picture = 'no image';
+//                dd($profile_picture_name);
+                if($profile_picture_name != null){
+                    if( ! is_dir(WWW_ROOT.'img'.DS.'customers_picture')){
+                        mkdir(WWW_ROOT.'img'.DS.'customers_picture', 0775);
+                    }
+                    $targetPath = WWW_ROOT.'img'.DS.'customers_picture'.DS.$profile_picture_name;
+                    move_uploaded_file($profile_picture['name'], $targetPath);
+                    $customer->profile_picture = 'customers_picture/'.$profile_picture_name;
                 }
-                $targetPath = WWW_ROOT.'img'.DS.'customers_picture'.DS.$profile_picture_name;
-                if ($profile_picture_name) $profile_picture->moveTo($targetPath);
-                $customer->profile_picture = 'customers_picture/'.$profile_picture_name;
             }
             if ($this->Customers->save($customer)) {
                 $this->Flash->success(__('The customer has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The customer could not be saved. Please, try again.'));
@@ -97,6 +130,7 @@ class CustomersController extends AppController
      */
     public function edit($id = null)
     {
+
         $customer = $this->Customers->get($id, [
             'contain' => [],
         ]);
@@ -104,17 +138,15 @@ class CustomersController extends AppController
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
             if(!$customer->getErrors){
                 $profile_picture = $this->request->getData('profile_picture');
-                $profile_picture_name = $profile_picture->getClientFilename();
-                if ($profile_picture_name){
+                $profile_picture_name = $profile_picture['name'];
+                $customer->profile_picture = 'no image';
+                if ($profile_picture_name!=null){
                     if( ! is_dir(WWW_ROOT.'img'.DS.'customers_picture')){
                         mkdir(WWW_ROOT.'img'.DS.'customers_picture', 0775);
                     }
                     $targetPath = WWW_ROOT.'img'.DS.'customers_picture'.DS.$profile_picture_name;
-                    $profile_picture->moveTo($targetPath);
-
+                    move_uploaded_file($profile_picture['name'], $targetPath);
                     $previous_profile_picture_path = WWW_ROOT.'img'.DS.$customer->profile_picture;
-//                    $previous_profile_picture_path = $customer->profile_picture;
-//                    debug($previous_profile_picture_path);
                     if(file_exists($previous_profile_picture_path)){
                         echo 'true';
                         unlink($previous_profile_picture_path);
@@ -151,5 +183,18 @@ class CustomersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    public function search()
+    {
+        $this->viewBuilder()->setLayout('ajax');
+        $this->request->allowMethod(['ajax', 'get']);
+
+        $keyword = $this->request->getQuery('keyword');
+//        dd($keyword);
+        $query = $this->Customers->find('all')
+                                 ->where(['or'=>['name like'=>'%'.$keyword.'%','phone_number like'=>'%'.$keyword.'%']]);
+
+        $this->set('customers', $this->paginate($query));
+//        $this->set('_serialize', ['customers']);
     }
 }

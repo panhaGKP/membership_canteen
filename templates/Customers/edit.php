@@ -3,6 +3,14 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Customer $customer
  */
+    $this->assign('title','Edit Customer');
+    $this->Breadcrumbs->add([
+        ['title'=>'List Customers', 'url'=>['controller'=>'customers','action'=>'index']],
+        ['title'=>
+            'Edit',
+            'url'=>['controller'=>'customers','action'=>'edit',$customer->id],
+            'option'=>['class'=>'active']]
+    ]);
 ?>
 <div class="row">
     <div class="column-responsive column-80">
@@ -24,7 +32,7 @@
                 echo $this->Form->control('date_of_birth', ['empty' => true, 'required'=>true, 'class'=>'my-3 w-50','label'=>[
                     'floating'=>true],]);
                 echo $this->Form->control('phone_number', ['class'=>'mb-3 w-50','label'=>['floating'=>true]]);
-                echo $this->Form->control('profile_picture', ['type'=>'file', 'required'=>true, 'class'=>'w-50']);
+                echo $this->Form->control('profile_picture', ['type'=>'file', 'class'=>'w-50']);
                 //                echo $this->Form->control('deleted');
                 ?>
             </fieldset>

@@ -7,6 +7,14 @@
  */
 //    debug(getType($customers));
 //    debug(getType($this->request->getQuery()));
+    $this->assign('title','Add Membership');
+    $this->Breadcrumbs->add([
+        ['title'=>'List Membership', 'url'=>['controller'=>'memberships','action'=>'index']],
+        ['title'=>
+            'Add',
+            'url'=>['controller'=>'memberships','action'=>'add'],
+            'option'=>['class'=>'active']]
+    ]);
 ?>
 <div class="row">
     <div class="column-responsive column-80">

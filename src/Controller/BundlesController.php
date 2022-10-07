@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
+
 /**
  * Bundles Controller
  *
@@ -10,7 +12,10 @@ namespace App\Controller;
  * @method \App\Model\Entity\Bundle[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
 class BundlesController extends AppController{
-
+    public function beforeFilter(EventInterface $event)
+    {
+        $this->viewBuilder()->setLayout('project_layout');
+    }
 
     public $paginate =[
             'limit'=> 5,
@@ -22,6 +27,7 @@ class BundlesController extends AppController{
      */
     public function index()
     {
+
         $bundles = $this->paginate($this->Bundles);
 
         $this->set(compact('bundles'));
@@ -36,6 +42,7 @@ class BundlesController extends AppController{
      */
     public function view($id = null)
     {
+
         $bundle = $this->Bundles->get($id, [
             'contain' => ['Memberships'],
         ]);
@@ -50,6 +57,7 @@ class BundlesController extends AppController{
      */
     public function add()
     {
+
         $bundle = $this->Bundles->newEmptyEntity();
         if ($this->request->is('post')) {
 
@@ -75,11 +83,14 @@ class BundlesController extends AppController{
      */
     public function edit($id = null)
     {
+
         $bundle = $this->Bundles->get($id, [
             'contain' => [],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $bundle = $this->Bundles->patchEntity($bundle, $this->request->getData());
+            $bundle->price = $bundle->price*100;
+
             if ($this->Bundles->save($bundle)) {
                 $this->Flash->success(__('The bundle has been saved.'));
 

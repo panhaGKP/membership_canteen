@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Core\App;
+use Cake\Event\EventInterface;
 
 /**
  * Checkins Controller
@@ -13,6 +14,10 @@ use Cake\Core\App;
  */
 class CheckinsController extends AppController
 {
+    public function beforeFilter(EventInterface $event)
+    {
+        $this->viewBuilder()->setLayout('project_layout');
+    }
     /**
      * Index method
      *
@@ -21,6 +26,7 @@ class CheckinsController extends AppController
 
     public function index()
     {
+
         //customize show limit option and order
         $this->paginate = [
             'contain' => ['Customers'],
@@ -44,6 +50,7 @@ class CheckinsController extends AppController
      */
     public function view($id = null)
     {
+
         $checkin = $this->Checkins->get($id, [
             'contain' => ['Customers'],
         ]);
@@ -94,6 +101,7 @@ class CheckinsController extends AppController
     } //add old version
     public function add() // new version
     {
+
         $data =$this->request->getQuery();
         $data['customer_id'] = intval($data['customer_id']);
         $data['membership_id'] = $data['membership_id'] == 'null'? null : intval($data['membership_id']);
@@ -120,6 +128,7 @@ class CheckinsController extends AppController
      */
     public function edit($id = null)
     {
+
         $checkin = $this->Checkins->get($id, [
             'contain' => [],
         ]);
@@ -156,6 +165,8 @@ class CheckinsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
     public function chooseCustomer(){
+        $this->viewBuilder()->setLayout('project_layout');
+
         if($this->request->is('post')){
             $data = $this->request->getData();
             dd($data);
@@ -164,6 +175,7 @@ class CheckinsController extends AppController
         $this->set(compact('customers'));
     }
     public function searchMemberships(){
+
         /**
          * @var \Cake\Collection\CollectionInterface|string[] $membership
          */

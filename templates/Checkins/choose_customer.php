@@ -6,6 +6,14 @@
  */
 
 //dd($this->request->getData());
+$this->assign('title','Choose Customer');
+$this->Breadcrumbs->add([
+    ['title'=>'List Check-ins', 'url'=>['controller'=>'checkins','action'=>'index']],
+    ['title'=>
+        'Choose Customer',
+        'url'=>['controller'=>'checkins','action'=>'chooseCustomer'],
+        'option'=>['class'=>'active']]
+]);
 ?>
 <div class="column-responsive column-80">
     <div class="checkins form content">

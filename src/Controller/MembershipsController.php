@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Event\EventInterface;
+
 /**
  * Memberships Controller
  *
@@ -11,6 +13,31 @@ namespace App\Controller;
  */
 class MembershipsController extends AppController
 {
+    public function beforeFilter(EventInterface $event)
+    {
+        $this->viewBuilder()->setLayout('project_layout');
+    }
+
+    public function search()
+    {
+        $this->request->allowMethod(['ajax']);
+
+        $keyword = $this->request->getQuery('keyword');
+        //debug($keyword);
+        $membership_list = $this->Memberships->find()
+            ->contain(['Customers'])
+            ->where([
+                'or' => [
+                    'Customers.name like' => '%' . $keyword . '%',
+                    'Customers.phone_number like' => '%' . $keyword . '%'
+                ]
+            ]);
+
+        $memberships = $this->paginate($membership_list);
+//        debug($memberships);
+
+        $this->set('memberships', $memberships);
+    }
 
     /**
      * Index method
@@ -19,25 +46,25 @@ class MembershipsController extends AppController
      */
     public function index()
     {
+
         $this->paginate = [
             'contain' => ['Customers', 'Bundles'],
             'limit' => 10,
-            'order'=>[
-                'id'=>'asc'
+            'order' => [
+                'id' => 'asc'
             ]
-
         ];
 
         $searchText = $this->request->getQuery('searchText');
 
-        if($searchText){
+        if ($searchText) {
             $searchText = trim($searchText);
-            $membership_id = $this->Memberships->Customers->find()->select('id')->where(['or'=>['name like'=>'%'.$searchText.'%','phone_number like'=>'%'.$searchText.'%']]);
+            $membership_id = $this->Memberships->Customers->find()->select('id')->where(['or' => ['name like' => '%' . $searchText . '%', 'phone_number like' => '%' . $searchText . '%']]);
 //            dd($membership_id);
-            $membership_list = $this->Memberships->find()->where(['customer_id in'=> $membership_id]);
+            $membership_list = $this->Memberships->find()->where(['customer_id in' => $membership_id]);
 //            dd($membership_list);
 
-        }else{
+        } else {
 
             $membership_list = $this->Memberships;
         }
@@ -56,6 +83,7 @@ class MembershipsController extends AppController
      */
     public function view($id = null)
     {
+
         $membership = $this->Memberships->get($id, [
             'contain' => ['Customers', 'Bundles'],
         ]);
@@ -70,6 +98,7 @@ class MembershipsController extends AppController
      */
     public function add()
     {
+
         $membership = $this->Memberships->newEmptyEntity();
         if ($this->request->is('post')) {
 //            debug($membership);
@@ -84,16 +113,6 @@ class MembershipsController extends AppController
             $duration = $bundle->duration;
             $membership->end_date = $membership->start_date->addDay($duration);
 
-
-            $today_date = date("Y-m-d");
-
-            if($membership->start_date->toDateString() <= $today_date && $membership->end_date->toDateString() >= $today_date){
-                $membership->is_active = true;
-            }else{
-                $membership->is_active = false;
-            }
-//            dd($membership->is_active);
-//            debug($membership);
             if ($this->Memberships->save($membership)) {
                 $this->Flash->success(__('The membership has been saved.'));
 
